@@ -26,39 +26,67 @@
     </header>
     <div class="container">
       <!-- Timeblocks go here -->
-      <div class="row">
-        <div  class="col-2 hour time-block">9 AM</div>
-        <div class="col-8"><textarea class="description" name="textarea"></textarea></div>
-        <div  class="col-2 saveBtn"><i class="fas fa-save"></i></div>
+      <div class="row time-block"data-hour=9>
+        <div class="col-md-1 hour">9 AM</div>
+        <textarea class="col-md-10 description" name="textarea"></textarea>
+        <button  class="btn saveBtn col-md-1"><i class="fas fa-save"></i></button>
       </div>
-      <div class="row">
-        <div  class="col-2 hour time-block">10 AM</div>
-        <div class="col-8"><textarea class="description" name="textarea"></textarea></div>
-        <div  class="col-2 saveBtn"><i class="fas fa-save"></i></div>
+      <div class="row time-block" data-hour=10>
+        <div class="col-md-1 hour" >10 AM</div>
+        <textarea class="col-md-10 description" name="textarea"></textarea>
+        <button class="btn saveBtn col-md-1"><i class="fas fa-save"></i></button>
       </div>
       <!-- finish writing timeblocks when styling is complete and functions written -->
     
     </div>
     <script>
+    $(document).ready(function() {
       // date and time at the top
       var dateTimeDiv = $("<div>")
       var currentDateTime = moment().format('MMMM Do YYYY')
-      /// update to include current time on a loop but not necessary
-      /// idea - run a loop through this function repeadtly  
+      // ** update to include current time on a loop but not necessary
+      // ** idea - run a loop through this function repeadtly  
       dateTimeDiv.html(currentDateTime);
       $("#currentDay").append(dateTimeDiv);
 
 
       // function for textarea styling based on current time
+          // variable for currnt hour that is pulled from moment
+          // if hour block > than current hour then future, else if = current hour, present time, else past time
+          // 
+      function checkTime(){
+        var now = moment().hours()
+        
+        console.log(now)
+        $(".time-block").each(function(){
+          var blockHour = parseInt($(this).attr("data-hour"))
+          console.log(blockHour)
+          if(blockHour < now ){
+            $(this).addClass("past")
+        }else if(blockHour === now){
+          $(this).removeClass("past")
+          $(this).addClass("present")
+        }else {
+          $(this).removeClass("past")
+          $(this).removeClass("present")
+          $(this).addClass("future")
+        }
+      })
+    }
+      checkTime()
+
       // click event on saveBtn to store in local storage
+      var toDoItem = $(".description")
+      $(".saveBtn").on("click", function(){
+        console.log("save button clicked")
+        localStorage.setItem("To Do Item", toDoItem)
+        })
 
 
 
 
 
-
-     
-
+    })
       </script>
   </body>
 </html>
