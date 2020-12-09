@@ -49,18 +49,12 @@
       dateTimeDiv.html(currentDateTime);
       $("#currentDay").append(dateTimeDiv);
 
-
       // function for textarea styling based on current time
-          // variable for currnt hour that is pulled from moment
-          // if hour block > than current hour then future, else if = current hour, present time, else past time
-          // 
       function checkTime(){
+        // variable for currnt hour that is pulled from moment
         var now = moment().hours()
-        
-        console.log(now)
         $(".time-block").each(function(){
           var blockHour = parseInt($(this).attr("data-hour"))
-          console.log(blockHour)
           if(blockHour < now ){
             $(this).addClass("past")
         }else if(blockHour === now){
