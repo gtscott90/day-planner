@@ -105,9 +105,12 @@
 
       // click event on saveBtn to store in local storage
       
-      $(".saveBtn").on("click", function(){
+      $("button").on("click", function(){
         // need a selector specific to the button clicked, like data hour 
+        var buttonText = $("button").prev().val()
         var toDoItem = $(this).parent().attr("data-hour");
+        
+        console.log(buttonText)
         console.log(toDoItem)
         console.log($(this).parent().attr("data-hour"))
         console.log("save button clicked")
