@@ -107,15 +107,18 @@
       
       $("button").on("click", function(){
         // need a selector specific to the button clicked, like data hour 
-        var buttonText = $("button").prev().val()
+        var buttonText = $(this).siblings(".description").val()
         var toDoItem = $(this).parent().attr("data-hour");
         
-        console.log(buttonText)
-        console.log(toDoItem)
-        console.log($(this).parent().attr("data-hour"))
-        console.log("save button clicked")
-        localStorage.setItem("To Do Item", toDoItem)
+        // console.log(buttonText)
+        // console.log(toDoItem)
+        // console.log($(this).parent().attr("data-hour"))
+        // console.log("save button clicked")
+        localStorage.setItem(toDoItem, buttonText)
         })
+
+        // retrieve from local storage
+        localStorage.getItem(buttonText)
 
 
 
